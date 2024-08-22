@@ -1,5 +1,7 @@
 @import '../utils/variables';
 
 .main {
-  
+  &__events-list {
+    margin: 250px 0;
+  }
 }
