@@ -1,0 +1,19 @@
+// common
+$mainFont: 'Montserrat';
+$transitionDuration: 0.3s;
+
+// colors
+$mainTextColor: #5e6282;
+$mainBGColor: #fff;
+
+// adapttives
+$minWidth: 320px;
+$maxWidth: 1440px;
+$containerPadding: 15px;
+$maxWidthContainer: 1200px + $containerPadding * 2;
+
+// breakpoints
+$pc: $maxWidthContainer;
+$tablet: 991.98px;
+$mobile: 767.98px;
+$mobileSmall: 479.98px;

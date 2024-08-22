@@ -1,0 +1,6 @@
+/* stylelint-disable selector-class-pattern */
+[class*="__container"] {
+  max-width: $maxWidthContainer;
+  margin: 0 auto;
+  padding: 0 $containerPadding;
+}

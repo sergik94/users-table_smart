@@ -1,0 +1,21 @@
+/* stylelint-disable selector-class-pattern */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: darkblue;
+  font-size: 32px;
+  font-weight: 500;
+
+  &__container {
+    height: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    color: #fff;
+  }
+}
