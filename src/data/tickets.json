@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "eventId": 1,
+    "category1": {
+      "price": 200,
+      "amount": 15
+    },
+    "category2": {
+      "price": 400,
+      "amount": 18
+    },
+    "category3": {
+      "price": 600,
+      "amount": 44
+    }
+  }
+]

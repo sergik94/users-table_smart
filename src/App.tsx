@@ -1,6 +1,8 @@
+import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { EventsList } from './components/EventsList';
+import { EventsActions } from './components/EventsActions';
 
 function App() {
   return (
@@ -9,7 +11,13 @@ function App() {
 
       <main className="page__main main">
         <div className="main__container">
-          <EventsList />
+          <EventsActions />
+
+          <Routes>
+            <Route path="/" element={<EventsList />} />
+
+            <Route path="/:event" element={<div>Some event</div>} />
+          </Routes>
         </div>
       </main>
 

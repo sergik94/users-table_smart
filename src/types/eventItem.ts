@@ -7,4 +7,5 @@ export interface EventItem {
   availableTickets: number;
   eventType: string;
   address: string;
+  [key: string]: string | number;
 }

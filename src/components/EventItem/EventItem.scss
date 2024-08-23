@@ -1,14 +1,26 @@
 @import '../../styles/utils/variables';
 
 .event {
+  max-width: 300px;
   padding: 15px;
   border: 1px solid gray;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  transition: all $transitionDuration;
 
-  &:hover {
-    box-shadow: 1px 2px 9px 0 #8a8a8a;
+  &__edit {
+    position: absolute;
+    right: 15px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: center / 24px no-repeat url("../../assets/icons/edit.svg"), #ffffffbc;
+
+    &:hover {
+      border: 1px solid #000;
+    }
   }
 
   &__img {
@@ -38,5 +50,9 @@
   &__info {
     display: flex;
     justify-content: space-between;
+  }
+
+  &:hover {
+    box-shadow: 1px 2px 9px 0 #8a8a8a;
   }
 }
