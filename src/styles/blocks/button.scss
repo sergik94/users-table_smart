@@ -1,0 +1,15 @@
+.button {
+  display: block;
+  padding: 15px 30px;
+  border: 2px solid darkblue;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: darkblue;
+  transition: $transitionDuration;
+
+  &:hover {
+    color: #fff;
+    background-color: darkblue;
+  }
+}

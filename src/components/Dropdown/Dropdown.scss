@@ -2,6 +2,9 @@
   position: relative;
 
   &__button {
+    padding: 12px;
+    text-transform: capitalize;
+
     &:hover {
       border-color: lightgrey;
     }
@@ -37,6 +40,7 @@
       box-shadow: 0 2px 15px rgba(0 0 0 / 5%);
       height: max-content;
       overflow-y: auto;
+      max-height: 5 * 32px;
     }
   }
 

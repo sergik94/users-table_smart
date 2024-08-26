@@ -2,17 +2,22 @@
   {
     "id": 1,
     "eventId": 1,
-    "category1": {
-      "price": 200,
-      "amount": 15
-    },
-    "category2": {
-      "price": 400,
-      "amount": 18
-    },
-    "category3": {
-      "price": 600,
-      "amount": 44
-    }
+    "categories": [
+      {
+        "title": "category 1",
+        "amount": 15,
+        "price": 200
+      },
+      {
+        "title": "category 2",
+        "amount": 18,
+        "price": 400
+      },
+      {
+        "title": "category 3",
+        "amount": 44,
+        "price": 600
+      }
+    ]
   }
 ]

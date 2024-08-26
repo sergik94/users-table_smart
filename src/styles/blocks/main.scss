@@ -1,34 +1,10 @@
 @import '../utils/variables';
 
 .main {
-  &__container {
-    padding-top: 160px;
-  }
-
   &__events-actions {
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-  }
-
-  &__create-event {
-    display: block;
-    padding: 15px 30px;
-    border: 2px solid darkblue;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 700;
-    color: darkblue;
-    transition: $transitionDuration;
-
-    &:hover {
-      color: #fff;
-      background-color: darkblue;
-    }
-  }
-
-  &__events-list {
-    margin-bottom: 250px;
   }
 }

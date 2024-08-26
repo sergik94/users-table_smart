@@ -1,22 +1,22 @@
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { EventsList } from './components/EventsList';
-import { EventsActions } from './components/EventsActions';
+import { AddEventForm } from './components/AddEventForm';
+import { Home } from './pages/Home';
+import { useAppDispatch } from './store/hooks';
 
 function App() {
+  const dispatch = useAppDispatch();
   return (
     <div className="page">
       <Header />
 
       <main className="page__main main">
         <div className="main__container">
-          <EventsActions />
-
           <Routes>
-            <Route path="/" element={<EventsList />} />
+            <Route path="/" element={<Home />} />
 
-            <Route path="/:event" element={<div>Some event</div>} />
+            <Route path="/addEvent" element={<AddEventForm />} />
           </Routes>
         </div>
       </main>

@@ -49,7 +49,7 @@ export const Dropdown: React.FC<Props> = ({ value, itemsList, callback }) => {
   }, [handleClick]);
 
   return (
-    <div className="creating-trip__dropdown dropdown">
+    <div className="sorts-filters__dropdown dropdown">
       <button
         type="button"
         className={classNames('dropdown__button inputfield', {
@@ -58,7 +58,7 @@ export const Dropdown: React.FC<Props> = ({ value, itemsList, callback }) => {
         onClick={toggleList}
         ref={buttonRef}
       >
-        Sort by {value || 'date'}
+        {value}
       </button>
 
       <ul

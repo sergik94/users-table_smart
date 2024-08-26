@@ -3,6 +3,8 @@ import './EventsActions.scss';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Dropdown } from '../Dropdown';
 import { getSearchBy } from '../../features/getSerchBy';
+import { formatDate } from '../../features/formatDate';
+import { getDateForCalendar } from '../../features/getDateForCalendar';
 
 export const EventsActions = () => {
   const sortedList = ['date', 'title'];
@@ -20,12 +22,6 @@ export const EventsActions = () => {
     setSearchParams(newSearchParams);
   };
 
-  const getDateForCalendar = (date: Date) => {
-    return date.toJSON().split('T')[0];
-  };
-  const formatDate = (date: string) => {
-    return date.split('-').reverse().join('.');
-  };
   const now = new Date();
   const minInputDate = getDateForCalendar(now);
   const maxInputDate = getDateForCalendar(
@@ -94,7 +90,7 @@ export const EventsActions = () => {
         <Dropdown value={sort} itemsList={sortedList} callback={handleSortBy} />
       </div>
 
-      <Link to={'/create'} className="main__create-event">
+      <Link to={'/addEvent'} className="main__create-event button">
         Add event
       </Link>
     </div>
