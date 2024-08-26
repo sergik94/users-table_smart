@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import cn from 'classnames';
 import './AddEventForm.scss';
 import { Dropdown } from '../Dropdown';
 import { formatDate } from '../../features/formatDate';
 import { getDateForCalendar } from '../../features/getDateForCalendar';
-import { Ticket } from '../../types/ticket';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { eventsSelector, ticketsSelector } from '../../store/selectors';
+import { getTotalTickets } from '../../features/getTotalTickets';
+import { actions as eventActions } from '../../reducers/eventsReducer';
+import { actions as ticketActions } from '../../reducers/ticketsReducer';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { EventItem } from '../../types/eventItem';
 
 const eventsTypeList = ['concert', 'festival', 'theatre', 'other'];
 
 export const AddEventForm = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [location, setLocation] = useState('');
-  const [eventType, setEventType] = useState('Event type');
-  const [posterURL, setPosterURL] = useState('');
-  const [tickets, setTickets] = useState<Ticket>({
-    id: 0,
-    eventId: 0,
+  const events = useAppSelector(eventsSelector);
+  const ticketsData = useAppSelector(ticketsSelector);
+
+  const navigate = useNavigate();
+  const pathArray = useLocation().pathname.split('/');
+  const isEdit = pathArray.at(-1) === 'edit';
+
+  let initialEvent: EventItem;
+  let currTickets;
+  const initialTickets = {
+    id: ticketsData.length + 1,
+    eventId: events.length + 1,
     categories: [
       {
         title: 'category 1',
@@ -26,7 +34,46 @@ export const AddEventForm = () => {
         price: 0,
       },
     ],
-  });
+  };
+
+  if (isEdit) {
+    initialEvent = events.find(
+      (ev) => ev.id === +(pathArray.at(-2) || 0),
+    ) as EventItem;
+    currTickets = ticketsData.find(
+      (t) => t.eventId === +(pathArray.at(-2) || 0),
+    );
+  } else {
+    initialEvent = {
+      id: events.length + 1,
+      title: '',
+      description: '',
+      date: '',
+      time: '',
+      location: '',
+      eventType: '',
+      posterURL: '',
+    };
+  }
+
+  const [title, setTitle] = useState(initialEvent?.title || '');
+  const [description, setDescription] = useState(
+    initialEvent?.description || '',
+  );
+  const [date, setDate] = useState(
+    initialEvent.date ? getDateForCalendar(new Date(initialEvent.date)) : '',
+  );
+  const [time, setTime] = useState(
+    initialEvent?.date?.split('T')[1]?.slice(0, 5) || '',
+  );
+  const [location, setLocation] = useState(initialEvent?.location || '');
+  const [eventType, setEventType] = useState(initialEvent?.eventType || '');
+  const [posterURL, setPosterURL] = useState(initialEvent?.posterURL || '');
+  const [isSubmit, setSubmit] = useState(false);
+
+  const [tickets, setTickets] = useState(currTickets || initialTickets);
+
+  const dispatch = useAppDispatch();
 
   const minInputDate = getDateForCalendar(new Date());
 
@@ -113,11 +160,60 @@ export const AddEventForm = () => {
     });
   };
 
+  const resetForm = () => {
+    setTitle('');
+    setDescription('');
+    setDate('');
+    setTime('');
+    setLocation('');
+    setEventType('');
+    setPosterURL('');
+    setTickets(initialTickets);
+    setSubmit(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmit(true);
+
+    if (!title || !description || !date || !time) return;
+
+    const eventData = {
+      id: initialEvent.id,
+      title,
+      description,
+      date: getDateForCalendar(new Date(date)) + 'T' + time,
+      availableTickets: getTotalTickets(tickets.categories),
+      eventType,
+      location,
+      posterURL,
+    };
+
+    if (!isEdit) {
+      dispatch(eventActions.add(eventData));
+      dispatch(ticketActions.add(tickets));
+    } else {
+      dispatch(eventActions.edit(eventData));
+      dispatch(ticketActions.edit(tickets));
+    }
+
+    resetForm();
+    navigate('/');
+  };
+
+  useEffect(() => {
+    setSubmit(false);
+  }, [title, description, date, time]);
+
   return (
-    <form className="main__eventForm event-form">
+    <form className="main__eventForm event-form" onSubmit={handleSubmit}>
       <h3 className="event-form__head">Main information</h3>
       <div className="event-form__main">
-        <label className="event-form__title inputfield">
+        <label
+          className={cn('event-form__title', 'inputfield', {
+            'inputfield--error': isSubmit && !title,
+          })}
+        >
           <input
             type="text"
             placeholder="Title"
@@ -126,7 +222,11 @@ export const AddEventForm = () => {
           />
         </label>
 
-        <label className="event-form__description">
+        <label
+          className={cn('event-form__description', {
+            'inputfield--error': isSubmit && !description,
+          })}
+        >
           <textarea
             value={description}
             placeholder="Description"
@@ -134,7 +234,11 @@ export const AddEventForm = () => {
           />
         </label>
 
-        <label className="event-form__date inputfield">
+        <label
+          className={cn('event-form__date', 'inputfield', {
+            'inputfield--error': isSubmit && !date,
+          })}
+        >
           <span>{formatDate(date) || 'Date'}</span>
           <input
             type="date"
@@ -144,9 +248,17 @@ export const AddEventForm = () => {
           />
         </label>
 
-        <label className="event-form__time inputfield">
+        <label
+          className={cn('event-form__time', 'inputfield', {
+            'inputfield--error': isSubmit && !time,
+          })}
+        >
           <span>{time || 'Time'}</span>
-          <input type="time" onChange={(e) => setTime(e.currentTarget.value)} />
+          <input
+            type="time"
+            onChange={(e) => setTime(e.currentTarget.value)}
+            value={time}
+          />
         </label>
       </div>
 
@@ -209,15 +321,11 @@ export const AddEventForm = () => {
                   />
                 </label>
 
-                {category.title === tickets.categories.at(-1)?.title &&
-                category.title !== 'category 1' ? (
-                  <button
-                    className="ticket-form__remove"
-                    onClick={removeTicketsCategory}
-                  />
-                ) : (
-                  <span></span>
-                )}
+                <button
+                  type="button"
+                  className="ticket-form__remove"
+                  onClick={removeTicketsCategory}
+                />
               </React.Fragment>
             ))}
           </div>
@@ -225,6 +333,7 @@ export const AddEventForm = () => {
           <button
             className="event-form__add-ticket-button"
             onClick={addTicketsCategory}
+            type="button"
           >
             Add catogory...
           </button>
@@ -232,7 +341,7 @@ export const AddEventForm = () => {
       </div>
 
       <button className="event-form__add-event-button button" type="submit">
-        Add event
+        {isEdit ? 'Accept' : 'Add event'}
       </button>
     </form>
   );

@@ -1,12 +1,13 @@
+import { Link } from 'react-router-dom';
 import './Header.scss';
 
 export const Header = () => {
   return (
     <header className="page__header header">
       <div className="header__container">
-        <a className="header__logo" href="/">
+        <Link className="header__logo" to="/">
           Events
-        </a>
+        </Link>
       </div>
     </header>
   );

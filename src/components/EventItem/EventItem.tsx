@@ -3,6 +3,9 @@ import { EventItem as EventItemType } from '../../types/eventItem';
 
 import './EventItem.scss';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
+import { ticketsSelector } from '../../store/selectors';
+import { getTotalTickets } from '../../features/getTotalTickets';
 
 type Props = {
   eventItem: EventItemType;
@@ -10,7 +13,10 @@ type Props = {
 
 export const EventItem: React.FC<Props> = ({ eventItem }) => {
   const formattedDate = new Date(eventItem.date).toLocaleDateString();
-  const route = eventItem.title.split(' ').join('-');
+  const ticketsData = useAppSelector(ticketsSelector);
+  const currTickets = ticketsData.find((t) => t.eventId === eventItem.id);
+  const totalTickets = getTotalTickets(currTickets?.categories);
+  const route = '/events/' + eventItem.id;
 
   return (
     <li className="main__event event">
@@ -30,9 +36,7 @@ export const EventItem: React.FC<Props> = ({ eventItem }) => {
 
       <div className="event__info">
         <div className="event__date">{formattedDate}</div>
-        <div className="event__tickets">
-          Tickets: {eventItem.availableTickets}
-        </div>
+        <div className="event__tickets">Tickets: {totalTickets}</div>
       </div>
     </li>
   );

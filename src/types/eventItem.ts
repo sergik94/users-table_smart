@@ -4,8 +4,8 @@ export interface EventItem {
   posterURL: string;
   description: string;
   date: string;
-  availableTickets: number;
+  availableTickets?: number;
   eventType: string;
-  address: string;
-  [key: string]: string | number;
+  location: string;
+  [key: string]: string | number | undefined;
 }

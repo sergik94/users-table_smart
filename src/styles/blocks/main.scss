@@ -7,4 +7,24 @@
     justify-content: space-between;
     align-items: flex-end;
   }
+
+  &__home-link {
+    display: block;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #000;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: center / 100% no-repeat url('../../assets/icons/left-black.svg');
+      margin-right: 10px;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

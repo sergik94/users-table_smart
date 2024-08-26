@@ -10,7 +10,12 @@ type AddEvent = {
   payload: EventItem;
 };
 
-type Actions = LoadEvents | AddEvent;
+type EditEvent = {
+  type: 'events/EDIT';
+  payload: EventItem;
+};
+
+type Actions = LoadEvents | AddEvent | EditEvent;
 
 export const actions = {
   load: (items: EventItem[]): LoadEvents => ({
@@ -18,6 +23,10 @@ export const actions = {
     payload: items,
   }),
   add: (item: EventItem): AddEvent => ({ type: 'events/ADD', payload: item }),
+  edit: (item: EventItem): EditEvent => ({
+    type: 'events/EDIT',
+    payload: item,
+  }),
 };
 
 const EventsReducer = (
@@ -32,6 +41,18 @@ const EventsReducer = (
 
     case 'events/ADD': {
       updatedEvents = [...items, action.payload];
+
+      break;
+    }
+
+    case 'events/EDIT': {
+      updatedEvents = items.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        }
+
+        return item;
+      });
 
       break;
     }

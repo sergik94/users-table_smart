@@ -17,7 +17,7 @@ export function sortItems(items: EventItem[], sortBy: string): EventItem[] {
           const prop1 = new Date(item1.date).getTime();
           const prop2 = new Date(item2.date).getTime();
 
-          return prop2 - prop1;
+          return prop1 - prop2;
         }
 
         default:
