@@ -7,9 +7,15 @@ type Props = {
   value: string | null;
   itemsList: string[];
   callback: (item: string) => void;
+  title?: string;
 };
 
-export const Dropdown: React.FC<Props> = ({ value, itemsList, callback }) => {
+export const Dropdown: React.FC<Props> = ({
+  value,
+  itemsList,
+  callback,
+  title,
+}) => {
   const [isListShown, setListShown] = useState(false);
   const ulRef = useRef<HTMLUListElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -58,7 +64,7 @@ export const Dropdown: React.FC<Props> = ({ value, itemsList, callback }) => {
         onClick={toggleList}
         ref={buttonRef}
       >
-        {value}
+        {value || title}
       </button>
 
       <ul

@@ -34,8 +34,6 @@ export const EventsList = () => {
     return modifiedArray;
   }, [sort, query, dateFrom, dateTo, events]);
 
-  console.log(events);
-
   return (
     <>
       <ul className="main__events-list events-list">

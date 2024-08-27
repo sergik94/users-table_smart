@@ -87,7 +87,12 @@ export const EventsActions = () => {
           </label>
         </div>
 
-        <Dropdown value={sort} itemsList={sortedList} callback={handleSortBy} />
+        <Dropdown
+          value={sort}
+          itemsList={sortedList}
+          callback={handleSortBy}
+          title={`Sort by date`}
+        />
       </div>
 
       <Link to={'/addEvent'} className="main__create-event button">

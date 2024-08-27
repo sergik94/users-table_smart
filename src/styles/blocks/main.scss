@@ -6,6 +6,18 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
+    @media (width < $mobile) {
+      display: block;
+    }
+  }
+
+  &__sorts-filters {
+    margin-bottom: 20px;
+  }
+
+  &__create-event {
+    max-width: 300px;
   }
 
   &__home-link {

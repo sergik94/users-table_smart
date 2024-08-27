@@ -31,6 +31,18 @@
     margin-bottom: 18px;
   }
 
+  &__no-poster {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: darkblue;
+    font-size: 32px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+
   &__title {
     font-weight: 700;
     text-transform: capitalize;

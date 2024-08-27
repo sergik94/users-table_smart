@@ -97,11 +97,21 @@ export const AddEventForm = () => {
     });
   };
 
-  const removeTicketsCategory = () => {
+  const removeTicketsCategory = (category: string) => {
     setTickets((prev) => {
+      const filteredCategories = prev.categories.filter(
+        (c) => c.title !== category,
+      );
+
+      const newCategoriesSet = filteredCategories.map((c, i) => {
+        return {
+          ...c,
+          title: 'category ' + (i + 1),
+        };
+      });
       return {
         ...prev,
-        categories: [...prev.categories.slice(0, -1)],
+        categories: newCategoriesSet,
       };
     });
   };
@@ -199,6 +209,7 @@ export const AddEventForm = () => {
 
     resetForm();
     navigate('/');
+    window.scrollTo({ top: 0 });
   };
 
   useEffect(() => {
@@ -277,6 +288,7 @@ export const AddEventForm = () => {
           value={eventType}
           itemsList={eventsTypeList}
           callback={selectEvetType}
+          title="Event type"
         />
 
         <label className="event-form__location inputfield">
@@ -324,7 +336,7 @@ export const AddEventForm = () => {
                 <button
                   type="button"
                   className="ticket-form__remove"
-                  onClick={removeTicketsCategory}
+                  onClick={() => removeTicketsCategory(category.title)}
                 />
               </React.Fragment>
             ))}

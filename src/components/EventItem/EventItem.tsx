@@ -23,11 +23,15 @@ export const EventItem: React.FC<Props> = ({ eventItem }) => {
       <Link className="event__edit" to={route + '/edit'}></Link>
 
       <Link to={route}>
-        <img
-          className="event__img"
-          src={eventItem.posterURL}
-          alt={eventItem.title}
-        />
+        {eventItem?.posterURL === '' ? (
+          <div className="event__no-poster">No poster</div>
+        ) : (
+          <img
+            src={eventItem.posterURL}
+            alt={eventItem.title}
+            className="event__img"
+          />
+        )}
       </Link>
 
       <h3 className="event__title">
