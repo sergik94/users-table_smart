@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/users-table_smart/static/css/main.055c826e.css",
+    "main.js": "/users-table_smart/static/js/main.d997565a.js",
+    "index.html": "/users-table_smart/index.html",
+    "main.055c826e.css.map": "/users-table_smart/static/css/main.055c826e.css.map",
+    "main.d997565a.js.map": "/users-table_smart/static/js/main.d997565a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.055c826e.css",
+    "static/js/main.d997565a.js"
+  ]
+}
