@@ -1,0 +1,59 @@
+@import '../../styles/utils/variables';
+
+.users {
+  overflow: auto;
+
+  &__search {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    background-color: #ffffffa1;
+    padding: 5px 10px;
+  }
+
+  table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0 0 0 / 10%);
+  }
+  
+  th,
+  td {
+    padding: 10px;
+    background-color: rgba(255 255 255 / 20%);
+    color: #fff;
+  }
+  
+  th {
+    text-align: left;
+    text-transform: capitalize;
+  }
+
+  tr {
+    width: 25%;
+  }
+  
+  thead {
+    th {
+      background-color: #55608f;
+    }
+  }
+  
+  tbody {
+    tr {
+      &:hover {
+        background-color: rgba(255 255 255 / 30%);
+      }
+    }
+  }
+
+  @media (width < $mobile) {
+    th, td, &__search {
+      font-size: 10px;
+      padding: 5px;
+    }
+  }
+}

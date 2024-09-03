@@ -1,38 +1,26 @@
-import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { Home } from './pages/Home';
 import { useAppDispatch } from './store/hooks';
-import { actions as eventActions } from './reducers/eventsReducer';
-import { actions as ticketActions } from './reducers/ticketsReducer';
-import { getEvents, getTickets } from './features/getData';
+import { actions as eventActions } from './reducers/usersReducer';
 import { useEffect, useState } from 'react';
-import { FormPage } from './pages/Form';
 import { Loader } from './components/Loader';
-import { EventPage } from './pages/EventPage';
+import { getUsers as getUsersFromServer } from './features/getData';
+import { UsersList } from './components/UsersList';
+import { User } from './types/user';
 
 function App() {
   const dispatch = useAppDispatch();
-  const [isEventsLoaded, setEventsLoaded] = useState(false);
-  const [isTicketsLoaded, setTicketsLoaded] = useState(false);
+  const [isUsersLoaded, setUsersLoaded] = useState(false);
 
-  const getEventItems = async () => {
-    const eventItems = await getEvents();
+  const getUsers = async () => {
+    const users: User[] = await getUsersFromServer();
 
-    setEventsLoaded(true);
-    dispatch(eventActions.load(eventItems));
-  };
-
-  const getTicketItems = async () => {
-    const tickets = await getTickets();
-
-    setTicketsLoaded(true);
-    dispatch(ticketActions.load(tickets));
+    setUsersLoaded(true);
+    dispatch(eventActions.load(users));
   };
 
   useEffect(() => {
-    getEventItems();
-    getTicketItems();
+    getUsers();
   }, []);
 
   return (
@@ -41,18 +29,7 @@ function App() {
 
       <main className="page__main main">
         <div className="main__container">
-          {isEventsLoaded && isTicketsLoaded ? (
-            <Routes>
-              <Route path="/" element={<Home />} />
-
-              <Route path="/addEvent" element={<FormPage />} />
-              <Route path="/events/:eventId/edit" element={<FormPage />} />
-
-              <Route path="/events/:eventId" element={<EventPage />} />
-            </Routes>
-          ) : (
-            <Loader />
-          )}
+          {!isUsersLoaded ? <Loader /> : <UsersList />}
         </div>
       </main>
 

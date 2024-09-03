@@ -1,13 +1,15 @@
-// Simulate a request to the server
+const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
-function wait(delay: number) {
-  return new Promise((resolve) => setTimeout(resolve, delay));
-}
+function request<T>(url: string): Promise<T> {
+  return fetch(BASE_URL + url).then((response) => {
+    if (!response.ok) {
+      throw new Error();
+    }
 
-async function request<T>(data: T): Promise<T> {
-  return wait(700).then(() => data);
+    return response.json();
+  });
 }
 
 export const client = {
-  get: <T>(data: T) => request(data),
+  get: <T>(url: string) => request<T>(url),
 };

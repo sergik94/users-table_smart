@@ -1,42 +1,7 @@
 @import '../utils/variables';
 
 .main {
-  &__events-actions {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-
-    @media (width < $mobile) {
-      display: block;
-    }
-  }
-
-  &__sorts-filters {
-    margin-bottom: 20px;
-  }
-
-  &__create-event {
-    max-width: 300px;
-  }
-
-  &__home-link {
-    display: inline-block;
-    margin-bottom: 30px;
-    font-size: 24px;
-    color: #000;
-
-    &::before {
-      content: "";
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      background: center / 100% no-repeat url('../../assets/icons/left-black.svg');
-      margin-right: 10px;
-    }
-
-    &:hover {
-      text-decoration: underline;
-    }
+  &__users {
+    margin: 0 auto;
   }
 }

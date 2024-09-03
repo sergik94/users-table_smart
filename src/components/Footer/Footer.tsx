@@ -5,7 +5,7 @@ export const Footer = () => {
 
   return (
     <footer className="page__footer footer">
-      © {year} Events. All rights reserved.
+      © {year} Users. All rights reserved.
     </footer>
   );
 };

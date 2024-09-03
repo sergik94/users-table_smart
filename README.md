@@ -1,13 +1,10 @@
 Dear User,
 
-welcome to EVENTS App. It doesn't need installation. The program is available at the [link](https://sergik94.github.io/events_hw/).
+welcome to USERS App. It doesn't need installation. The program is available at the [link](https://sergik94.github.io/users-table_smart/).
 
-You have the following options:
+Next features are implemented:
 
-1. View the list of events with general details.
-2. View all event details by clicking on the poster or event title.
-3. Add a new event by clicking the Add Event button.
-4. Edit an existing event by clicking the Edit button (upper right/left corner).
-5. Add multiple ticket categories to each event.
-6. Sort events by date and name (default by date)
-7. Filter events by title.
+1. A loader is displayed while loading data.
+2. Filter by each category using input fields.
+3. The filter starts working 500 ms after the last key press by the user. (The useDebonce hook is used).
+4. The user can enter the phone number in any format. The filter works ONLY with numbers.

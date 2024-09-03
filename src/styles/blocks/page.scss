@@ -5,7 +5,7 @@
   flex-direction: column;
   min-height: 100vh;
   overflow: hidden;
-  background-color: $mainBGColor;
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
 
   &__main {
     flex-grow: 1;

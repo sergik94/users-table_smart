@@ -1,12 +1,6 @@
-import eventItems from '../data/events.json';
-import tickets from '../data/tickets.json';
-
 import { client } from '../api/api';
+import { User } from '../types/user';
 
-export const getEvents = async () => {
-  return await client.get(eventItems);
-};
-
-export const getTickets = async () => {
-  return await client.get(tickets);
+export const getUsers = async () => {
+  return await client.get<User[]>('/users');
 };
